@@ -1,0 +1,1 @@
+# USD_Exp_MA_TrendAnalysis
