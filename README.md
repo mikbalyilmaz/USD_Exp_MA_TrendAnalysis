@@ -44,13 +44,13 @@
 # Additive Structure:
  $Y_t = T_t + M_t + D_t + R_t$
 # Multiplicative Structure:
-# Y_t = T_t * M_t * D_t * R_t
+ $Y_t = T_t * M_t * D_t * R_t$
 
 # Stationarity Analysis
 # Covariance Stationarity (Weak Stationarity):
-# E(Y_t) = μ  (Constant mean)
-# Var(Y_t) = σ^2 (Constant variance)
-# Cov(Y_t, Y_{t-k}) = γ_k (Autocovariance depends only on lag k)
+ $E(Y_t) = μ$  (Constant mean)
+ $Var(Y_t) = σ^2$ (Constant variance)
+ $Cov(Y_t, Y_{t-k}) = γ_k$ (Autocovariance depends only on lag k)
 
 # Strong Stationarity:
 # If the joint distributions of a time series remain constant over time, it is strongly stationary.
@@ -61,21 +61,21 @@ import numpy as np
 import statsmodels.api as sm
 
 # Generating time index and calculating log-transformed series
-foreign_dataset['t'] = range(1, len(foreign_dataset) + 1)
-foreign_dataset['log_usd_sepet'] = np.log(foreign_dataset['usd_sepet'])
+$foreign_dataset['t'] = range(1, len(foreign_dataset) + 1)$
+$foreign_dataset['log_usd_sepet'] = np.log(foreign_dataset['usd_sepet'])$
 
 # Preparing the regression model
-X = foreign_dataset[['t']]
-X = sm.add_constant(X)
-y = foreign_dataset['log_usd_sepet']
+$X = foreign_dataset[['t']]$
+$X = sm.add_constant(X)$
+$y = foreign_dataset['log_usd_sepet']$
 
 # Fitting the OLS model
-model = sm.OLS(y, X).fit()
-print(model.summary())
+$model = sm.OLS(y, X).fit()$
+$print(model.summary())$
 
 # Predicting and reversing the log transformation
-foreign_dataset['usd_sepet_pred'] = np.exp(model.predict(X))
-print(foreign_dataset[['t', 'usd_sepet', 'usd_sepet_pred']].head())
+$foreign_dataset['usd_sepet_pred'] = np.exp(model.predict(X))$
+$print(foreign_dataset[['t', 'usd_sepet', 'usd_sepet_pred']].head())$
 
 # Observed vs Predicted Values
 # Observed: Last observed value = 34.20 USD/TRY
