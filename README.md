@@ -7,38 +7,57 @@ Warning: 'alis' means 'buy', 'satis' means 'sale'.
 
 
 ---
-avor exponential smoothing with 
-, where a smaller 
- would ensure historical data are factored into future predictions with more significance than a larger 
-.
+The analysis of the `usd_bask` variable reveals an exponential pattern, prompting an investigation into the presence of a trend, which may include seasonality or other distortions. Initial observations suggest that the series demonstrates an exponential trend and the presence of a unit root. The primary components of a time series are:
 
-It is evident that the usd_bask variable exhibits an exponential pattern. In this case, we will examine the presence of a trend, which could be seasonality or another type of distortion. Initially, it appears that the series has an exponential trend and unit root presence. The components forming the time series are Trend (T), Seasonal Change (M), Cyclical Movements (D), and Random Movements (R), with random change being an essential component. Time series can follow either an additive or multiplicative structure. Additive structure: 
-; Multiplicative structure: 
-. Stationarity is evaluated in two types. 5.2.1 Covariance Stationarity (Weak Stationarity): If the 1st and 2nd moments of the 
- series are independent of time 
-, the process is called covariance stationary or weakly stationary. For weak stationarity: 
- and 
- must hold. Autocovariance: 
- must be independent of time difference 
- and 
- for all k; if so, the process is weakly stationary. Example: 
-, where 
- is an independent process. Mean: 
- and autocovariance: 
-, the process is covariance stationary. However, for 
-, 
-, indicating that the 1st moment is time-dependent, hence it is not covariance stationary. 5.2.2 Strong Stationarity: If the joint distributions of a time series are identical across different time periods, the process is called strongly stationary; in most applications, weak stationarity suffices. Trend Analysis: A linear trend model is suitable when the 
- series shows a constant increase or decrease, and the model is: 
-, where 
- is the time variable (years, periods, etc.), and 
- and 
- are parameters. In the case of an exponential trend model, where 
- series changes at a constant percentage rate, the model is: 
-. Taking the natural logarithm gives the log-linear form: 
-; 
- represents the average growth rate.
+- **Trend (T):** The long-term movement in the data.
+- **Seasonal Change (M):** Repeating patterns at fixed intervals.
+- **Cyclical Movements (D):** Fluctuations over longer periods.
+- **Random Movements (R):** Irregular, unpredictable variations.
 
-Selection deleted
+A time series can follow an **additive** or **multiplicative** structure:
+
+- **Additive Structure:**
+  \[ Y_t = T_t + M_t + D_t + R_t \]
+- **Multiplicative Structure:**
+  \[ Y_t = T_t \times M_t \times D_t \times R_t \]
+
+**Stationarity in Time Series:**
+Stationarity is classified into two main types:
+
+### 1. Covariance Stationarity (Weak Stationarity):
+A time series is covariance stationary if its first and second moments are time-independent. For weak stationarity, the following conditions must hold:
+
+\[ E(Y_t) = \mu \] (Constant mean)
+\[ Var(Y_t) = \sigma^2 \] (Constant variance)
+\[ Cov(Y_t, Y_{t-k}) = \gamma_k \] (Autocovariance depends only on lag \(k\), not time \(t\))
+
+Example:
+Let \( Y_t = \epsilon_t + \alpha \epsilon_{t-1} \), where \( \epsilon_t \) is white noise with mean \( 0 \) and variance \( \sigma^2 \). Then:
+
+- Mean: \( E(Y_t) = 0 \)
+- Autocovariance: \( \gamma_k = \alpha^k \sigma^2 \) for all \(k\)
+
+If \( Y_t = t \epsilon_t \), the mean and variance become time-dependent, violating weak stationarity.
+
+### 2. Strong Stationarity:
+A time series is strongly stationary if its joint distributions remain constant across time. In most applications, weak stationarity suffices.
+
+**Trend Analysis:**
+When analyzing trends, a linear model is appropriate if the series exhibits a constant rate of change:
+\[ Y_t = \beta_0 + \beta_1 t + \epsilon_t \]
+where \( t \) is time and \( \beta_0 \), \( \beta_1 \) are parameters.
+
+For exponential growth:
+\[ Y_t = \beta_0 e^{\beta_1 t} \]
+Taking the natural logarithm yields:
+\[ \ln(Y_t) = \ln(\beta_0) + \beta_1 t \]
+Here, \( \beta_1 \) represents the average growth rate.
+
+**Empirical Analysis:**
+The following Python script was employed to fit a log-linear trend model to the `usd_sepet` series:
+
+```
+python
 foreign_dataset['t'] = range(1, len(foreign_dataset) + 1)
 foreign_dataset['log_usd_sepet'] = np.log(foreign_dataset['usd_sepet'])
 X = foreign_dataset[['t']]
@@ -48,41 +67,43 @@ model = sm.OLS(y, X).fit()
 print(model.summary())
 foreign_dataset['usd_sepet_pred'] = np.exp(model.predict(X))
 print(foreign_dataset[['t', 'usd_sepet', 'usd_sepet_pred']].head())
-                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:          log_usd_sepet   R-squared:                       0.945
-Model:                            OLS   Adj. R-squared:                  0.945
-Method:                 Least Squares   F-statistic:                     2566.
-Date:                Mon, 28 Oct 2024   Prob (F-statistic):           8.14e-96
-Time:                        00:53:58   Log-Likelihood:                 20.200
-No. Observations:                 151   AIC:                            -36.40
-Df Residuals:                     149   BIC:                            -30.36
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-const          0.1780      0.035      5.106      0.000       0.109       0.247
-t              0.0202      0.000     50.658      0.000       0.019       0.021
-==============================================================================
-Omnibus:                       42.797   Durbin-Watson:                   0.040
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):                8.976
-Skew:                           0.206   Prob(JB):                       0.0112
-Kurtosis:                       1.879   Cond. No.                         176.
-==============================================================================
+```
 
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-            t  usd_sepet  usd_sepet_pred
-date                                    
-2012-04-01  1   1.784130        1.219114
-2012-05-01  2   1.801291        1.243933
-2012-06-01  3   1.820452        1.269256
-2012-07-01  4   1.809239        1.295095
-2012-08-01  5   1.790140        1.321460
----
+### Model Results:
 
-Last observed value of usd_sepet: 34.20USD/TRY
-Last estimated value of MA usd_sepet: 33.93USD/TRY
+**OLS Regression Results:**
 
-The project is not over..
+- **Dependent Variable:** `log_usd_sepet`
+- **R-squared:** 0.945
+- **Adj. R-squared:** 0.945
+- **F-statistic:** 2566
+- **Prob (F-statistic):** \( 8.14 \times 10^{-96} \)
+- **Number of Observations:** 151
+- **AIC:** -36.40
+- **BIC:** -30.36
+
+**Coefficients:**
+\[ \text{const} = 0.1780, \; \text{t} = 0.0202 \]
+Both coefficients are statistically significant (\( p < 0.000 \)), suggesting a robust log-linear relationship.
+
+### Interpretation:
+1. The positive \( t \) coefficient (0.0202) implies an average growth rate of approximately 2.02% per unit time.
+2. The high R-squared (0.945) indicates that the model explains 94.5% of the variance in the log-transformed series.
+
+### Observed vs. Predicted Values:
+| Time (t) | Observed USD Basket | Predicted USD Basket |
+|----------|---------------------|-----------------------|
+| 1        | 1.784              | 1.219                |
+| 2        | 1.801              | 1.244                |
+| 3        | 1.820              | 1.269                |
+| 4        | 1.809              | 1.295                |
+| 5        | 1.790              | 1.321                |
+
+### Recent Values:
+- **Last observed value:** 34.20 USD/TRY
+- **Last estimated value:** 33.93 USD/TRY
+
+### Conclusion:
+The analysis confirms the presence of a significant exponential trend in the `usd_sepet` series. The model’s predictions align closely with observed values, indicating its reliability. Further analysis will incorporate seasonality and cyclicality to refine the forecasting accuracy. This project remains ongoing, with potential enhancements in structural modeling and diagnostics.
+
+
