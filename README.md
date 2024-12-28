@@ -42,7 +42,7 @@
 
 # --- Time Series Components ---
 # Additive Structure:
-# Y_t = T_t + M_t + D_t + R_t
+ $Y_t = T_t + M_t + D_t + R_t$
 # Multiplicative Structure:
 # Y_t = T_t * M_t * D_t * R_t
 
