@@ -1,3 +1,20 @@
+Bütün haklar saklıdır.
+
+Bu projenin tüm hakları saklıdır. Kodun, tasarımın ve içeriğin izinsiz olarak kopyalanması, dağıtılması, değiştirilmesi veya herhangi bir şekilde kullanılması yasaktır.
+© 2025 mikbalyilmaz
+
+
+****************************************************************************************************************************************
+
+
+All rights reserved.
+
+All rights to this project are reserved. The code, design, and content may not be copied, distributed, modified, or used in any way without permission.
+© 2025 mikbalyilmaz
+
+
+****************************************************************************************************************************************
+
 # USD_Exp_MA_TrendAnalysis
 
  Let us now look at two built-in Python libraries. When it comes to financial data management,
@@ -80,3 +97,20 @@ print(foreign_dataset[['t', 'usd_sepet', 'usd_sepet_pred']].head())
 # Observed vs Predicted Values
  Observed: Last observed value = 34.20 USD/TRY
  Predicted: Last estimated value = 33.93 USD/TRY
+
+ Bütün haklar saklıdır.
+
+Bu projenin tüm hakları saklıdır. Kodun, tasarımın ve içeriğin izinsiz olarak kopyalanması, dağıtılması, değiştirilmesi veya herhangi bir şekilde kullanılması yasaktır.
+© 2025 mikbalyilmaz
+
+
+****************************************************************************************************************************************
+
+
+All rights reserved.
+
+All rights to this project are reserved. The code, design, and content may not be copied, distributed, modified, or used in any way without permission.
+© 2025 mikbalyilmaz
+
+
+****************************************************************************************************************************************
