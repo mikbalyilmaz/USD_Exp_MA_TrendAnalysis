@@ -52,14 +52,14 @@ The primary methodological framework includes **Moving Averages** and **Exponent
 ## Core Equations
 
 **Additive Decomposition:**  
-$$ Y_t = T_t + M_t + D_t + R_t $$  
+$ Y_t = T_t + M_t + D_t + R_t $  
 
 **Multiplicative Decomposition:**  
-$$ Y_t = T_t \times M_t \times D_t \times R_t $$  
+$ Y_t = T_t \times M_t \times D_t \times R_t $ 
 
 **Stationarity Conditions:**  
 - Weak Stationarity:  
-  $$ E(Y_t) = \mu, \quad Var(Y_t) = \sigma^2, \quad Cov(Y_t, Y_{t-k}) = \gamma_k $$  
+  $ E(Y_t) = \mu, \quad Var(Y_t) = \sigma^2, \quad Cov(Y_t, Y_{t-k}) = \gamma_k $ 
 - Strong Stationarity:  
   Joint distributions remain invariant across time.  
 
