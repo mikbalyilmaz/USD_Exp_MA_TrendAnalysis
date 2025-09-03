@@ -64,23 +64,3 @@ $ Y_t = T_t \times M_t \times D_t \times R_t $
   Joint distributions remain invariant across time.  
 
 ---
-
-## Empirical Implementation
-
-```python
-import pandas as pd
-import numpy as np
-import statsmodels.api as sm
-
-# Time index and log transformation
-foreign_dataset['t'] = range(1, len(foreign_dataset) + 1)
-foreign_dataset['log_usd_sepet'] = np.log(foreign_dataset['usd_sepet'])
-
-# Regression model
-X = sm.add_constant(foreign_dataset[['t']])
-y = foreign_dataset['log_usd_sepet']
-model = sm.OLS(y, X).fit()
-
-# Prediction and reverse transformation
-foreign_dataset['usd_sepet_pred'] = np.exp(model.predict(X))
-print(foreign_dataset[['t', 'usd_sepet', 'usd_sepet_pred']].head())
