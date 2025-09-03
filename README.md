@@ -1,116 +1,86 @@
 Bütün haklar saklıdır.
 
-Bu projenin tüm hakları saklıdır. Kodun, tasarımın ve içeriğin izinsiz olarak kopyalanması, dağıtılması, değiştirilmesi veya herhangi bir şekilde kullanılması yasaktır.
+Bu projenin tüm hakları saklıdır. Kodun, tasarımın ve içeriğin izinsiz olarak kopyalanması, dağıtılması, değiştirilmesi veya herhangi bir şekilde kullanılması yasaktır.  
 © 2025 mikbalyilmaz
 
-
 ****************************************************************************************************************************************
-
 
 All rights reserved.
 
-All rights to this project are reserved. The code, design, and content may not be copied, distributed, modified, or used in any way without permission.
+All rights to this project are reserved. The code, design, and content may not be copied, distributed, modified, or used in any way without permission.  
 © 2025 mikbalyilmaz
-
 
 ****************************************************************************************************************************************
 
-# USD_Exp_MA_TrendAnalysis
+# USD_Exp_MA_TrendAnalysis  
+[![View Project](https://img.shields.io/badge/View_Project-517FF7)](https://github.com/mikbalyilmaz/USD_Exp_MA_TrendAnalysis)  
+[![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)  
 
- Let us now look at two built-in Python libraries. When it comes to financial data management,
- two of the most frequently used Python packages/libraries are Pandas and Numpy. 
- A function can be easily called only after we import the library. 
- This is why the command for importing libraries is always put at the beginning of a script.
- To employ the pandas library, we import it on the notebook. 
- This line means that Jupyter is told to import the pandas library and assigns it a short name, `pd`, for ease of reference. 📚
+This project presents a comprehensive **time series analysis** of monthly USD/TRY and EUR/TRY exchange rates from Q1 2012 to October 2024. Data is sourced from the Turkish Central Bank’s EVDS database, using buying and selling rates averaged into a consistent basket rate.  
 
- One of the first steps of every statistical analysis is importing the dataset to be analyzed into the software.
- Depending on the format of the data, there are different ways of accomplishing this task.
- This study conducts a comprehensive analysis of monthly USD/TRY and EUR/TRY exchange rates from Q1 2012 to October 2024.
- Data, acquired from the Turkish Central Bank’s EVDS database, consists of separate buying and selling rates,
- later averaged into a 'basket' rate for consistency. 🌐
+The primary methodological framework includes **Moving Averages** and **Exponential Smoothing Techniques**, such as centered moving averages, simple exponential smoothing, and the Holt-Winters model. These techniques enable decomposition of the series into **trend, seasonal, and cyclical components**, providing deeper insights into underlying dynamics.  
 
- Initially, the analysis focuses on USD/TRY before moving to EUR/TRY in parallel,
- applying various time series methods to capture both trend and seasonality.
- The primary methodological framework includes Moving Averages and Smoothing Techniques,
- such as centered moving averages, simple exponential smoothing, and the Holt-Winters model. 
- These techniques smooth the data, helping reveal trend and seasonal components effectively. 
+---
 
- Stationarity of the series is then assessed through the Augmented Dickey-Fuller (ADF) test, 
- which identifies whether transformations, like differencing or logarithmic adjustments, 
- are needed to stabilize mean and variance over time.
- Once stationarity is confirmed, Model Selection and Forecasting proceeds using both additive and multiplicative 
- decompositions to select a model aligned with the data’s structure. ✨
+## Methodological Framework
 
- Further, advanced forecasting models, including Holt's linear (two-parameter) and seasonal (three-parameter) adjustments, 
- as well as exponential trend modeling, are applied. 
- For series with substantial trend and seasonal components, Box-Jenkins ARMA modeling will enhance forecast precision.
- Autocorrelation Analysis through autocorrelation and partial autocorrelation functions (normalized via Bartlett’s correction) 
- assesses whether trend components need to be removed. 
- The theoretical basis for these methods rests on stochastic process principles, where a real-valued time series in probability space
- forms a stochastic process, a sequence of random variables evolving over time.
- Detailed mathematical formulations supporting each step will follow in later sections. 🧮
+- **Data Preparation**  
+  Importing datasets via Python’s `pandas` and `numpy` libraries. Initial transformations include basket rate averaging and log-transformations.  
 
- Trend Component Analysis distinguishes between linear and nonlinear growth or decline over the long term, 
- as expressed by the trend function. Seasonal Components are addressed by observing recurring patterns in monthly exchange rates. 
- Additionally, Cyclical Components, characterized by longer-term fluctuations influenced by economic policies, are examined.
+- **Trend and Seasonality Analysis**  
+  - Centered Moving Averages  
+  - Simple Exponential Smoothing  
+  - Holt-Winters Seasonal Model  
+  - Decomposition into additive and multiplicative structures  
 
-# ⚠️ Warning: `alis` means `buy`, `satis' means `sale`.
+- **Stationarity and Model Selection**  
+  - Augmented Dickey-Fuller (ADF) test  
+  - Transformations (log, differencing) applied as needed  
+  - Box-Jenkins ARMA modeling for enhanced forecast precision  
 
-# --- Time Series Components ---
-# Additive Structure:
- $Y_t = T_t + M_t + D_t + R_t$
-# Multiplicative Structure:
- $Y_t = T_t * M_t * D_t * R_t$
+- **Autocorrelation Analysis**  
+  - Autocorrelation and Partial Autocorrelation Functions (ACF/PACF)  
+  - Bartlett’s correction for normalized confidence bounds  
 
-# Stationarity Analysis
-# Covariance Stationarity (Weak Stationarity):
- $E(Y_t) = μ$  (Constant mean)
- $Var(Y_t) = σ^2$ (Constant variance)
- $Cov(Y_t, Y_{t-k}) = γ_k$ (Autocovariance depends only on lag k)
+- **Forecasting and Evaluation**  
+  - Holt’s Linear and Seasonal Adjustments  
+  - Exponential Trend Models  
+  - Comparative analysis between observed and predicted values  
 
-# Strong Stationarity:
-# If the joint distributions of a time series remain constant over time, it is strongly stationary.
+---
 
-# Empirical Analysis
-import `pandas` as `pd`
-import `numpy` as `np`
-import `statsmodels.api` as `sm`
+## Core Equations
 
-# Generating time index and calculating log-transformed series
+**Additive Decomposition:**  
+$$ Y_t = T_t + M_t + D_t + R_t $$  
+
+**Multiplicative Decomposition:**  
+$$ Y_t = T_t \times M_t \times D_t \times R_t $$  
+
+**Stationarity Conditions:**  
+- Weak Stationarity:  
+  $$ E(Y_t) = \mu, \quad Var(Y_t) = \sigma^2, \quad Cov(Y_t, Y_{t-k}) = \gamma_k $$  
+- Strong Stationarity:  
+  Joint distributions remain invariant across time.  
+
+---
+
+## Empirical Implementation
+
+```python
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+
+# Time index and log transformation
 foreign_dataset['t'] = range(1, len(foreign_dataset) + 1)
 foreign_dataset['log_usd_sepet'] = np.log(foreign_dataset['usd_sepet'])
 
-# Preparing the regression model
-X = foreign_dataset[['t']]
-X = sm.add_constant(X)
+# Regression model
+X = sm.add_constant(foreign_dataset[['t']])
 y = foreign_dataset['log_usd_sepet']
-
-# Fitting the OLS model
 model = sm.OLS(y, X).fit()
-print(model.summary())
 
-# Predicting and reversing the log transformation
+# Prediction and reverse transformation
 foreign_dataset['usd_sepet_pred'] = np.exp(model.predict(X))
 print(foreign_dataset[['t', 'usd_sepet', 'usd_sepet_pred']].head())
-
-# Observed vs Predicted Values
- Observed: Last observed value = 34.20 USD/TRY
- Predicted: Last estimated value = 33.93 USD/TRY
-
- Bütün haklar saklıdır.
-
-Bu projenin tüm hakları saklıdır. Kodun, tasarımın ve içeriğin izinsiz olarak kopyalanması, dağıtılması, değiştirilmesi veya herhangi bir şekilde kullanılması yasaktır.
-© 2025 mikbalyilmaz
-
-
-****************************************************************************************************************************************
-
-
-All rights reserved.
-
-All rights to this project are reserved. The code, design, and content may not be copied, distributed, modified, or used in any way without permission.
-© 2025 mikbalyilmaz
-
-
-****************************************************************************************************************************************
