@@ -1,5 +1,14 @@
 # Changes
 
+## Version 2.0.1
+
+No result changed: every table and every number in the note is the same as in version 2.0.0.
+
+| # | Version 2.0.0 | Version 2.0.1 |
+|---|---|---|
+| 1 | The dashed lines in Figures 1 and 2 were explained in the note and the README, but not in the heading of the PNG files | The headings of `fig1_trend.png` and `fig2_seasonality.png` state what the dashed lines are |
+| 2 | The README caption of Figure 2 did not mention the dashed line | Caption completed |
+
 ## Version 2.0.0
 
 ### New

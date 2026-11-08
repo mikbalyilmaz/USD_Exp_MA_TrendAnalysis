@@ -5,4 +5,4 @@ from .data import basket, load, load_v1, log100
 from .methods import (METHODS, centered_ma, exp_trend, month_effects, rmse, rolling_forecast_errors,
                       trailing_ma)
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"

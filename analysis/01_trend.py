@@ -70,4 +70,5 @@ def draw():
     return fig
 
 
-save_figure("fig1_trend", draw, lambda: "Figure 1. The two rates and what an exponential trend leaves over")
+save_figure("fig1_trend", draw, lambda: "Figure 1. The two rates and what an exponential trend leaves over "
+                    "(dashed grey: 2 × 12 centred moving average of USD/TRY)")

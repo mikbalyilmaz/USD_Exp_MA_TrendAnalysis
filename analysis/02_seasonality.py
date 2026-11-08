@@ -53,4 +53,5 @@ def draw():
 
 
 save_figure("fig2_seasonality", draw,
-            lambda: "Figure 2. Mean monthly change by calendar month, with 95% intervals")
+            lambda: "Figure 2. Mean monthly change by calendar month, with 95% intervals "
+                    "(dashed: mean over all months)")

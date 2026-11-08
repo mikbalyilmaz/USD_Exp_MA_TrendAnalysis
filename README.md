@@ -31,7 +31,7 @@ the exponential trend, per cent.
 **There is no monthly seasonality.** The monthly change does not differ by calendar month: F test of 11 month dummies
 $p$ = 0.86 (USD) and 0.60 (EUR), Kruskal–Wallis $p$ = 0.65 and 0.63.
 
-**Figure 2.** Mean monthly change in each calendar month, with 95% intervals.
+**Figure 2.** Mean monthly change in each calendar month, with 95% intervals; dashed: mean over all months.
 
 ![Figure 2](figures/fig2_seasonality.png)
 
